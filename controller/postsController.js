@@ -96,22 +96,22 @@ export const updateAPost = async (req, res) => {
       }
     } else if (addDeleteUpdate) {
       if (addDeleteUpdate === "DELETE") {
-        const updatedPost = await Post.findByIdAndUpdate(postId,
+        updatedPost = await Post.findByIdAndUpdate(postId,
           { "$pull": { "comments": comment } },
           { new: true }
         )
-        res.status(201).json({ update: "successfully updated comments", ...updatedPost })
+        // return res.status(201).json({ update: "successfully updated comments", ...updatedPost })
 
       } else if (addDeleteUpdate === "ADD") {
-        const updatedPost = await Post.findByIdAndUpdate(postId,
+        updatedPost = await Post.findByIdAndUpdate(postId,
           { "$push": { "comments": comment } },
           { new: true }
         )
-        res.status(201).json({ update: "successfully updated comments", ...updatedPost })
+        // return res.status(201).json({ update: "successfully updated comments", ...updatedPost })
 
       } else if (addDeleteUpdate === "UPDATE") {
         //!!!inside the comments array each item has an _id field even tho not shown in mongo
-        const updatedPost = await Post.findOneAndUpdate(
+        updatedPost = await Post.findOneAndUpdate(
           { _id: postId, comments: { $elemMatch: { _id: commentId } } },
           { $set: { 'comments.$.comment': updatedComment } },
           { 'new': true, 'safe': true, 'upsert': true }
@@ -119,10 +119,10 @@ export const updateAPost = async (req, res) => {
         //find doc by _id postId, go into comments field find items where its _id matches commentId
         //change the comment field to updatedComment in the selected $item(whose _id is commentId) in the comments array 
         // doc > comments array > comment item > comment field with the text
-        res.status(201).json({ update: "successfully updated comments", ...updatedPost })
+        // return res.status(201).json({ update: "successfully updated comments", ...updatedPost })
 
       } else {
-        res.status(400).json({ message: "addDeleteUpdate must be set to ADD DELETE or UPDATE" })
+        return res.status(400).json({ message: "addDeleteUpdate must be set to ADD DELETE or UPDATE" })
       }
     }
 
