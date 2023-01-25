@@ -98,28 +98,28 @@ function MessagePopup() {
       <div className="flex justify-between w-full py-2 bg-stone-800 px-0.5 ">
         <div className=" flex items-center flex-1 truncate w-[70%]">
           {messagingUser ? (
-            <Avatar>
+            <Avatar className=" scale-75">
               <img src={messagingUser.image} alt="" />
             </Avatar>
           ) : (
-            <Avatar className=" h-5 w-5  m-0 text-sm">S</Avatar>
+            <Avatar className=" scale-75  m-0 text-sm"></Avatar>
           )}
           <p className=" inline-block text-sm whitespace-nowrap ml-1 flex-wrap truncate">{messagingUser?.name || "New message"}</p>
-          <KeyboardArrowDownIcon className=" h-3 w-3 ml-1 " />
+          <KeyboardArrowDownIcon className=" -ml-1 scale-75" />
         </div>
 
         <div className=" flex items-center space-x-0">
           <div className="flex items-center justify-center cursor-pointer bg-transparent hover:bg-stone-500 rounded-full h-5 w-5">
-            <LocalPhoneIcon className=" p-0 h-4 w-4 scale-75" />
+            <LocalPhoneIcon className=" p-0  scale-75" />
           </div>
           <div className="flex items-center justify-center cursor-pointer bg-transparent hover:bg-stone-500 rounded-full h-5 w-5">
-            <VideocamIcon className=" p-0 h-4 w-4 scale-75" />
+            <VideocamIcon className=" p-0  scale-75" />
           </div>
           <div className="flex items-center justify-center cursor-pointer bg-transparent hover:bg-stone-500 rounded-full h-5 w-5">
-            <RemoveIcon className=" p-0 h-4 w-4 scale-75 " />
+            <RemoveIcon className=" p-0  scale-75 " />
           </div>
           <div onClick={() => dispatch(toggleOpen())} className="flex items-center justify-center cursor-pointer bg-transparent hover:bg-stone-500 rounded-full h-5 w-5">
-            <CloseIcon className=" p-0 h-4 w-4 scale-75 " />
+            <CloseIcon className=" p-0  scale-75 " />
           </div>
         </div>
       </div>
@@ -168,7 +168,7 @@ function MessagePopup() {
         </form> */}
 
         <div className=" mr-2">
-          <ThumbUpIcon className=" h-5" />
+          <ThumbUpIcon className=" h-5 scale-75 " />
         </div>
       </div>
     </div>

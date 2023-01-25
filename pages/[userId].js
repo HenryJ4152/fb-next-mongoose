@@ -193,7 +193,7 @@ function UserPage({ userSSR, users, posts }) {
             {!guestUser ? (
               <img className="rounded-full h-32 w-32 -mt-3 object-cover" src={userSSR?.image} alt="user profile image" />
             ) : (
-              <Avatar className="rounded-full h-32 w-32 -mt-3 object-cover"></Avatar>
+              <img className="rounded-full h-32 w-32 -mt-3 object-scale-down" src={"https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"} alt="user profile image" />
             )}
 
             <div className=" flex flex-col mt-3 w-full">
