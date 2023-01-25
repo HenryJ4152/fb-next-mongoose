@@ -202,24 +202,24 @@ function UserPage({ userSSR, users, posts }) {
 
               <div className=" flex justify-between w-full bg-stone-800">
                 <div className=" flex">
-                  <Avatar className=" w-5 h-5 scale-75 -ml-3 z-40 bg-blue-700" />
-                  <Avatar className=" w-5 h-5 scale-75 -ml-3 z-40 bg-blue-600" />
-                  <Avatar className=" w-5 h-5 scale-75 -ml-3 z-40 bg-blue-500" />
-                  <Avatar className=" w-5 h-5 scale-75 -ml-3 z-30 bg-blue-400" />
-                  <Avatar className=" w-5 h-5 scale-75 -ml-3 z-20 bg-blue-300" />
-                  <Avatar className=" w-5 h-5 scale-75 -ml-3 z-10 bg-blue-200" />
-                  <Avatar className=" w-5 h-5 scale-75 -ml-3 z-0 bg-blue-100" />
+                  <Avatar className=" scale-75 -ml-3 z-40 bg-blue-700" />
+                  <Avatar className=" scale-75 -ml-3 z-40 bg-blue-600" />
+                  <Avatar className=" scale-75 -ml-3 z-40 bg-blue-500" />
+                  <Avatar className=" scale-75 -ml-3 z-30 bg-blue-400" />
+                  <Avatar className=" scale-75 -ml-3 z-20 bg-blue-300" />
+                  <Avatar className=" scale-75 -ml-3 z-10 bg-blue-200" />
+                  <Avatar className=" scale-75 -ml-3 z-0 bg-blue-100" />
 
                 </div>
 
                 {allowPost && !guestUser &&
                   <div className=" flex space-x-2">
                     <button className=" text-sm bg-blue-500 px-1.5 py-0.5 flex items-center space-x-1 rounded-md pb-1">
-                      <span><AddCircleRoundedIcon className=" h-4 w-4 mb-0.5" /></span>
+                      <span><AddCircleRoundedIcon className=" scale-75 " /></span>
                       <p>Add to story</p>
                     </button>
                     <button className=" text-sm bg-stone-600 px-1.5 py-0.5 flex items-center space-x-1 rounded-md pb-1">
-                      <span><CreateIcon className=" h-4 w-4 mb-0.5" /></span>
+                      <span><CreateIcon className=" scale-75  " /></span>
                       <p>Edit profile</p>
                     </button>
                   </div>
@@ -228,11 +228,11 @@ function UserPage({ userSSR, users, posts }) {
                 {!allowPost && !guestUser && session &&
                   <div className=" flex space-x-2">
                     <button className=" text-sm bg-stone-600 px-1.5 py-0.5 flex items-center space-x-1 rounded-md pb-1">
-                      <span><ChatBubbleIcon className=" h-4 w-4 mb-0.5" /></span>
+                      <span><ChatBubbleIcon className=" scale-75 " /></span>
                       <p>Message</p>
                     </button>
                     <button onClick={handleFriendReq} className=" text-sm bg-blue-500 px-1.5 py-0.5 flex items-center space-x-1 rounded-md pb-1">
-                      <span><PersonAddIcon className=" h-4 w-4 mb-0.5" /></span>
+                      <span><PersonAddIcon className=" scale-75 " /></span>
                       {friendStatusChanged &&
                         <p>{friendStatusChanged}</p>
                       }
