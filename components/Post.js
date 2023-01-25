@@ -158,9 +158,9 @@ function Post({ postId, author, comments, likes, text }) {
             </div>
             <div className=" flex relative">
               <div ref={optionsRef} onClick={optionsClicked}>
-                <Avatar className=" w-6 h-6 bg-transparent hover:bg-stone-500 cursor-pointer">
+                <div className="flex items-center justify-center rounded-full w-6 h-6 bg-transparent hover:bg-stone-500 cursor-pointer">
                   <MoreHorizIcon className="w-5 h-5 " />
-                </Avatar>
+                </div>
               </div>
               {deletePostId === postId &&
                 <DeletePostPopup optionsRef={optionsRef} postId={postId} author={author} text={text} />
@@ -178,8 +178,8 @@ function Post({ postId, author, comments, likes, text }) {
             {/* show num likes */}
             {likes?.length > 0 ?
               (
-                <div className=" items-center flex space-x-2 mr-auto">
-                  <ThumbUpIcon className=" h-4 w-4" />
+                <div className=" flex items-center space-x-2 mr-auto">
+                  <ThumbUpIcon className=" h-4 w-4 scale-75" />
                   <p>{likes.length || 0}</p>
                 </div>
               ) : (

@@ -105,9 +105,9 @@ function CreatePostModal() {
         {/* first row */}
         <div className=' flex items-center justify-center relative'>
           <p className=' text-white mt-3 text-lg'>Create Post</p>
-          <IconButton onClick={handleClose} className=' absolute right-0 top-3 bg-stone-600 hover:bg-stone-500 cursor-pointer w-8 h-8'>
-            <CloseIcon />
-          </IconButton>
+          <div onClick={handleClose} className='flex items-center justify-center absolute right-0 top-3 bg-stone-600 hover:bg-stone-500 cursor-pointer w-8 h-8 rounded-full '>
+            <CloseIcon className=' scale-90' />
+          </div>
         </div>
         {/* post itself */}
         {session ? (

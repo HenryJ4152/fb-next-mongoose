@@ -202,13 +202,13 @@ function UserPage({ userSSR, users, posts }) {
 
               <div className=" flex justify-between w-full bg-stone-800">
                 <div className=" flex">
-                  <Avatar className=" w-5 h-5 -ml-1 z-40 bg-blue-700" />
-                  <Avatar className=" w-5 h-5 -ml-1 z-40 bg-blue-600" />
-                  <Avatar className=" w-5 h-5 -ml-1 z-40 bg-blue-500" />
-                  <Avatar className=" w-5 h-5 -ml-1 z-30 bg-blue-400" />
-                  <Avatar className=" w-5 h-5 -ml-1 z-20 bg-blue-300" />
-                  <Avatar className=" w-5 h-5 -ml-1 z-10 bg-blue-200" />
-                  <Avatar className=" w-5 h-5 -ml-1 z-0 bg-blue-100" />
+                  <Avatar className=" w-5 h-5 scale-75 -ml-3 z-40 bg-blue-700" />
+                  <Avatar className=" w-5 h-5 scale-75 -ml-3 z-40 bg-blue-600" />
+                  <Avatar className=" w-5 h-5 scale-75 -ml-3 z-40 bg-blue-500" />
+                  <Avatar className=" w-5 h-5 scale-75 -ml-3 z-30 bg-blue-400" />
+                  <Avatar className=" w-5 h-5 scale-75 -ml-3 z-20 bg-blue-300" />
+                  <Avatar className=" w-5 h-5 scale-75 -ml-3 z-10 bg-blue-200" />
+                  <Avatar className=" w-5 h-5 scale-75 -ml-3 z-0 bg-blue-100" />
 
                 </div>
 

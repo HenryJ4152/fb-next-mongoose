@@ -33,6 +33,13 @@ function MessagePopup() {
 
   const { isLoading, error, data } = useQuery([`messages`, id1, id2], () => fetchMessages(id1, id2))
 
+  //scroll to bottom of msgs
+  const endOfMessages = useRef()
+  useEffect(() => {
+    endOfMessages.current.scrollIntoView({ behavior: "smooth" })
+
+  }, [endOfMessages, data])
+
 
 
   useEffect(() => {
@@ -102,18 +109,18 @@ function MessagePopup() {
         </div>
 
         <div className=" flex items-center space-x-0">
-          <Avatar className=" cursor-pointer bg-transparent hover:bg-stone-500 rounded-full h-5 w-5">
-            <LocalPhoneIcon className=" p-0 h-4 w- " />
-          </Avatar>
-          <Avatar className=" cursor-pointer bg-transparent hover:bg-stone-500 rounded-full h-5 w-5">
-            <VideocamIcon className=" p-0 h-4 w-4 " />
-          </Avatar>
-          <Avatar className=" cursor-pointer bg-transparent hover:bg-stone-500 rounded-full h-5 w-5">
-            <RemoveIcon className=" p-0 h-4 w-4 " />
-          </Avatar>
-          <Avatar onClick={() => dispatch(toggleOpen())} className=" cursor-pointer bg-transparent hover:bg-stone-500 rounded-full h-5 w-5">
-            <CloseIcon className=" p-0 h-4 w-4 " />
-          </Avatar>
+          <div className="flex items-center justify-center cursor-pointer bg-transparent hover:bg-stone-500 rounded-full h-5 w-5">
+            <LocalPhoneIcon className=" p-0 h-4 w-4 scale-75" />
+          </div>
+          <div className="flex items-center justify-center cursor-pointer bg-transparent hover:bg-stone-500 rounded-full h-5 w-5">
+            <VideocamIcon className=" p-0 h-4 w-4 scale-75" />
+          </div>
+          <div className="flex items-center justify-center cursor-pointer bg-transparent hover:bg-stone-500 rounded-full h-5 w-5">
+            <RemoveIcon className=" p-0 h-4 w-4 scale-75 " />
+          </div>
+          <div onClick={() => dispatch(toggleOpen())} className="flex items-center justify-center cursor-pointer bg-transparent hover:bg-stone-500 rounded-full h-5 w-5">
+            <CloseIcon className=" p-0 h-4 w-4 scale-75 " />
+          </div>
         </div>
       </div>
 
@@ -123,6 +130,8 @@ function MessagePopup() {
         {data?.messages?.map(msg => (
           <Message key={msg._id} sender={msg.sender == session?.user?.id.substring(0, 17)} text={msg.message} />
         ))}
+
+        <div ref={endOfMessages} className="h-0.5"></div>
 
       </div>
 

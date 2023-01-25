@@ -26,9 +26,9 @@ function SearchResult({ id, name, image, setShowResults }) {
         </Avatar>
         <p>{name}</p>
       </div>
-      <Avatar className=' bg-transparent hover:bg-stone-600 cursor-pointer h-6 w-6'>
-        <CloseIcon className=' fill-stone-400 h-4 w-4' />
-      </Avatar>
+      <div className='flex justify-center items-center bg-transparent hover:bg-stone-600 cursor-pointer h-6 w-6 rounded-full'>
+        <CloseIcon className=' fill-stone-400 h-4 w-4  scale-90 ' />
+      </div>
     </div>
     // </Link>
   )

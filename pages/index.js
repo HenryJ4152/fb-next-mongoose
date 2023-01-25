@@ -92,7 +92,9 @@ export async function getServerSideProps(context) {
 
 
 // TODO:
-//guest user no add friend button
+// fix icons in deployed mode
+// guest user no add friend button
+// make a realtime chat app with next mongoose socket 
 // connect socket io - pick up msges - vercel does not support. heroku supports socketio
 // store image? on firebase?
 
@@ -126,6 +128,7 @@ export async function getServerSideProps(context) {
 // add friend
 // useQuery for updated friend status
 // issue - send friend request to one user is ok. go to another profile and send friend request the ui is not updating - the data after sending request is stale so it does not show req was sent but mongo did receive it - issue with queryClient.invalidate not calling after routing to another dynamic page. fixed this issue by grabbing the data object form useMutation's onSuccess which is the object that is returned from hitting mongoDB so we can check the changes in the document and use that to change the UI 
+// open chat and send msg scroll to bottom
 
 
 
