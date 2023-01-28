@@ -27,7 +27,7 @@ function MessagePopup() {
   // console.log(messagingUser);
 
 
-  const id1 = session?.user?.id
+  const id1 = session?.user?.id || "000"
   const id2 = messagingUser?.id
 
 
@@ -128,7 +128,7 @@ function MessagePopup() {
       <div className=" flex-1 w-full bg-stone-800 flex-col flex overflow-y-scroll scrollbar-thin scrollbar-thumb-stone-100">
 
         {data?.messages?.map(msg => (
-          <Message key={msg._id} sender={msg.sender == session?.user?.id.substring(0, 17)} text={msg.message} />
+          <Message key={msg._id} sender={msg.sender == id1} text={msg.message} />
         ))}
 
         <div ref={endOfMessages} className="h-0.5"></div>
