@@ -186,7 +186,7 @@ export const fetchMessages = async (id1, id2) => {
   return data
 }
 
-export const fetchPostMessage = async (docId, senderId, msg) => {
+export const fetchPostMessage = async (docId, senderId, msg, createdAt) => {
 
   const res = await fetch(`/api/messages/${docId}`, {
     method: "POST",
@@ -196,7 +196,8 @@ export const fetchPostMessage = async (docId, senderId, msg) => {
     body: JSON.stringify({
       docId,
       senderId,
-      msg
+      msg,
+      createdAt
     })
   })
   const data = await res.json()

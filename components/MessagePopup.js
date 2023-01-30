@@ -12,6 +12,10 @@ import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { fetchMessages, fetchPostMessage } from "../utils/helpers";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import io from 'socket.io-client';
+
+
+let socket
 
 function MessagePopup() {
 
@@ -26,24 +30,93 @@ function MessagePopup() {
 
   // console.log(messagingUser);
 
-
   const id1 = session?.user?.id || "000"
   const id2 = messagingUser?.id
 
 
   const { isLoading, error, data } = useQuery([`messages`, id1, id2], () => fetchMessages(id1, id2))
 
+
+  const ENDPOINT = 'http://localhost:5000'
+
+  const [socketMsg, setSocketMsg] = useState(null)
+  const [socketMsgs, setSocketMsgs] = useState([])
+  useEffect(() => {
+    socket = io.connect(ENDPOINT)
+    socket?.on('connect', () => {
+      console.log('Successfully connected!');
+    });
+
+    return () => {
+      socket.disconnect()
+
+      socket.off()
+    }
+
+  }, [ENDPOINT])
+
+  // receive msgs
+  useEffect(() => {
+    console.log(id2)
+    socket.on("getMessage", msg => {
+      console.log(msg)
+      const msgObj = {
+        _id: msg.text,
+        sender: msg.senderId,
+        message: msg.text,
+      }
+      setSocketMsg(msgObj)
+    })
+  }, [socket, id2, messagingUser])
+  //add received msg to msgs array
+  useEffect(() => {
+    if (socketMsg && socketMsg.sender === id2) {
+      // console.log(socketMsg)
+
+      setSocketMsgs(old => [...old, socketMsg])
+    }
+  }, [socketMsg, socket])
+  //clear socketMsgs when click on screen bc reactquery's data will duplicate msgs if socketmsgs are not cleared 
+  useEffect(() => {
+    const windowClicked = () => {
+      setSocketMsgs([])
+    }
+
+    document.addEventListener('click', windowClicked, true);
+    return () => {
+      document.removeEventListener('click', windowClicked, true);
+    };
+  }, []);
+
+
+
+  //add user to server's list of users
+  useEffect(() => {
+    socket.emit("addUser", id1)
+
+    socket.on("getUsers", users => {
+      // console.log(users);
+    })
+  }, [id1])
+
+
+
+
+
+
+
+
   //scroll to bottom of msgs
   const endOfMessages = useRef()
   useEffect(() => {
     endOfMessages.current.scrollIntoView({ behavior: "smooth" })
 
-  }, [endOfMessages, data])
+  }, [endOfMessages, data, socketMsgs])
 
 
 
+  //changes height of the text area
   useEffect(() => {
-    //changes height of the text area
     msgTextAreaRef.current.style.height = "0px"
 
     let scrollHeight = msgTextAreaRef.current.scrollHeight;
@@ -68,25 +141,39 @@ function MessagePopup() {
   }
 
 
+  //sending msgs to mongo
   const queryClient = useQueryClient()
-  const sendMutation = useMutation(([docId, senderId, msg]) => fetchPostMessage(docId, senderId, msg), {
+  const sendMutation = useMutation(([docId, senderId, msg, createdAt]) => fetchPostMessage(docId, senderId, msg, createdAt), {
     onSuccess: () => {
       // Invalidate and refetch
       queryClient.invalidateQueries('messages')
       console.log("success");
+
       setMessageInput("")
+
+
     },
   })
 
 
+  //sending msgs to mongo
   const handleSendMessage = (e) => {
     e.preventDefault();
 
-    const msg = msgTextAreaRef.current.value
+    const msg = messageInput
     const messageDocId = data._id
     const senderId = session?.user?.id.substring(0, 17) || "000"
+    const createdAt = new Date()
+    // console.log(createdAt.getTime())
+    sendMutation.mutate([messageDocId, senderId, msg, createdAt])
 
-    sendMutation.mutate([messageDocId, senderId, msg])
+    //send msg to socket
+    socket?.emit("sendMessage", {
+      senderId: id1,
+      receiverId: id2,
+      text: messageInput
+    })
+
   }
 
 
@@ -131,6 +218,10 @@ function MessagePopup() {
           <Message key={msg._id} sender={msg.sender == id1} text={msg.message} />
         ))}
 
+        {socketMsgs?.map(msg => (
+          <Message key={msg._id} sender={msg.sender == id1} text={msg.message} />
+        ))}
+
         <div ref={endOfMessages} className="h-0.5"></div>
 
       </div>
@@ -152,20 +243,6 @@ function MessagePopup() {
         </form>
 
 
-        {/* <form
-          // ref={editFormRef}
-          className=" w-full flex-1 rounded-xl m-0 p-0 inline"
-        // onKeyDown={onEnterEscPress}
-
-        >
-          <textarea
-            // ref={editTextAreaRef}
-            // value={commentInput}
-            // onChange={e => setCommentInput(e.target.value)}
-            className=" w-full flex-1 outline-none resize-none text-sm pb-0 inset-0 break-all scrollbar-thin scrollbar-thumb-slate-200 pr-2"
-            type="text">
-          </textarea>
-        </form> */}
 
         <div className=" mr-2">
           <ThumbUpIcon className=" h-5 scale-75 " />

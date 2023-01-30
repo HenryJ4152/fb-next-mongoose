@@ -28,8 +28,8 @@ export const getMessages = async (req, res) => {
 
 // POST /api/messages/[id1id2]
 export const postMessage = async (req, res) => {
-  const { docId, senderId, msg } = req.body
-  if (!docId || !senderId || !msg) res.status(400).json({ message: "missing docId senderId or msg" })
+  const { docId, senderId, msg, createdAt } = req.body
+  if (!docId || !senderId || !msg || !createdAt) res.status(400).json({ message: "missing docId senderId or msg" })
 
   try {
     const messagesDoc = await Message.findByIdAndUpdate(docId,
@@ -38,6 +38,7 @@ export const postMessage = async (req, res) => {
           "messages": {
             sender: senderId,
             message: msg,
+            createdAt: createdAt,
           }
         }
       }, { new: true }
@@ -47,5 +48,4 @@ export const postMessage = async (req, res) => {
     res.status(400).json({ success: false })
   }
 }
-
 

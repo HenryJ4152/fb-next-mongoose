@@ -2,7 +2,7 @@
 import { Schema, models, model } from 'mongoose'
 
 const messageSchema = new Schema({
-  // _id
+  // _id auto generated
   participants: {
     type: [String],
     required: true,
@@ -12,6 +12,7 @@ const messageSchema = new Schema({
       {
         sender: String,
         message: String,
+        createdAt: Date,
       }
     ],
     required: true,
