@@ -35,12 +35,17 @@ function MessagePopup() {
 
 
   const { isLoading, error, data } = useQuery([`messages`, id1, id2], () => fetchMessages(id1, id2))
+  const [messages, setMessages] = useState([])
+  useEffect(() => {
+    if (data) {
+      setMessages(data.messages)
+    }
+  }, [data])
 
 
-  const ENDPOINT = 'http://localhost:5000'
+  const ENDPOINT = 'https://facebook-socketio.onrender.com'
 
   const [socketMsg, setSocketMsg] = useState(null)
-  const [socketMsgs, setSocketMsgs] = useState([])
   useEffect(() => {
     socket = io.connect(ENDPOINT)
     socket?.on('connect', () => {
@@ -49,7 +54,6 @@ function MessagePopup() {
 
     return () => {
       socket.disconnect()
-
       socket.off()
     }
 
@@ -73,20 +77,9 @@ function MessagePopup() {
     if (socketMsg && socketMsg.sender === id2) {
       // console.log(socketMsg)
 
-      setSocketMsgs(old => [...old, socketMsg])
+      setMessages(old => [...old, socketMsg])
     }
   }, [socketMsg, socket])
-  //clear socketMsgs when click on screen bc reactquery's data will duplicate msgs if socketmsgs are not cleared 
-  useEffect(() => {
-    const windowClicked = () => {
-      setSocketMsgs([])
-    }
-
-    document.addEventListener('click', windowClicked, true);
-    return () => {
-      document.removeEventListener('click', windowClicked, true);
-    };
-  }, []);
 
 
 
@@ -94,9 +87,9 @@ function MessagePopup() {
   useEffect(() => {
     socket.emit("addUser", id1)
 
-    socket.on("getUsers", users => {
-      // console.log(users);
-    })
+    // socket.on("getUsers", users => {
+    //   // console.log(users);
+    // })
   }, [id1])
 
 
@@ -109,9 +102,9 @@ function MessagePopup() {
   //scroll to bottom of msgs
   const endOfMessages = useRef()
   useEffect(() => {
+    // endOfMessages.current.scrollIntoView()
     endOfMessages.current.scrollIntoView({ behavior: "smooth" })
-
-  }, [endOfMessages, data, socketMsgs])
+  }, [endOfMessages, data, messages])
 
 
 
@@ -214,13 +207,10 @@ function MessagePopup() {
       {/* messages */}
       <div className=" flex-1 w-full bg-stone-800 flex-col flex overflow-y-scroll scrollbar-thin scrollbar-thumb-stone-100">
 
-        {data?.messages?.map(msg => (
+        {messages?.map(msg => (
           <Message key={msg._id} sender={msg.sender == id1} text={msg.message} />
         ))}
 
-        {socketMsgs?.map(msg => (
-          <Message key={msg._id} sender={msg.sender == id1} text={msg.message} />
-        ))}
 
         <div ref={endOfMessages} className="h-0.5"></div>
 
