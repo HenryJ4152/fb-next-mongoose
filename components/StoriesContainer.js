@@ -19,7 +19,7 @@ function StoriesContainer() {
       </div>
 
 
-      <div className=" grid grid-cols-4 xl:grid-cols-5 w-full h-48  justify-between my-2 py-2 px-2 space-x-2">
+      <div className=" grid grid-cols-3 md:grid-cols-4 xl:grid-cols-5 w-full h-48  justify-between my-2 py-2 px-2 space-x-2">
         <div className=" flex-1 flex  justify-center bg-stone-600 rounded-xl overflow-hidden">
           <img
             className=" w-full h-full object-cover"
@@ -39,7 +39,7 @@ function StoriesContainer() {
             className=" w-full h-full object-cover"
             src="https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/WOPA160517_D056-resized.jpg?crop=864%2C0%2C1728%2C2304&wid=600&hei=800&scl=2.88" alt="" />
         </div>
-        <div className=" flex-1 flex  justify-center bg-stone-600 rounded-xl overflow-hidden">
+        <div className=" hidden flex-1 md:flex  justify-center bg-stone-600 rounded-xl overflow-hidden">
           <img
             className=" w-full h-full object-cover"
             src="https://images.unsplash.com/photo-1420593248178-d88870618ca0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8bmF0dXJhbHxlbnwwfHwwfHw%3D&w=1000&q=80" alt="" />

@@ -49,7 +49,7 @@ function CreatePostContainer() {
               Photo/video
             </p>
           </div>
-          <div className=' flex items-center space-x-1 cursor-pointer hover:bg-stone-600 rounded-lg p-1 flex-1 justify-center '>
+          <div className=' hidden sm:flex items-center space-x-1 cursor-pointer hover:bg-stone-600 rounded-lg p-1 flex-1 justify-center '>
             <InsertEmoticonIcon className='fill-yellow-500' />
             <p className=' text-sm'>
               Feeling/activity

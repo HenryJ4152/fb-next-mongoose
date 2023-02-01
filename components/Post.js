@@ -18,6 +18,8 @@ function Post({ postId, author, comments, likes, text }) {
 
   const { data: session } = useSession()
 
+  const currentUserId = session?.user?.id || "000"
+
   const dispatch = useDispatch()
   const deletePostId = useSelector(state => state.postReducer.deletePostId)
   const deletedPosts = useSelector(state => state.postReducer.deletedPosts)
@@ -38,7 +40,7 @@ function Post({ postId, author, comments, likes, text }) {
     }
   }
 
-  const [likedByUser, setLikedByUser] = useState(likes.includes(session?.user?.id) || false)
+  const [likedByUser, setLikedByUser] = useState(likes.includes(currentUserId) || false)
 
   const queryClient = useQueryClient()
 
@@ -54,21 +56,21 @@ function Post({ postId, author, comments, likes, text }) {
   const likeClicked = async () => {
     // console.log(session.user.id)
 
-    if (likes?.includes(session.user.id)) {
-      likes.splice(likes.indexOf(session.user.id), 1)
+    if (likes?.includes(currentUserId)) {
+      likes.splice(likes.indexOf(currentUserId), 1)
       // console.log(likes)
       // console.log(likes.includes(session.user.id))
       setLikedByUser(false)
       // remove from mongo
-      updateMutation.mutate([postId, session.user.id, false])
+      updateMutation.mutate([postId, currentUserId, false])
 
     } else {
-      likes.push(session.user.id)
+      likes.push(currentUserId)
       // console.log('add user id to likes', likes)
       // console.log(likes.includes(session.user.id))
       setLikedByUser(true)
       // add to mongo
-      updateMutation.mutate([postId, session.user.id, true])
+      updateMutation.mutate([postId, currentUserId, true])
     }
   }
 
@@ -119,7 +121,7 @@ function Post({ postId, author, comments, likes, text }) {
     e.preventDefault()
     postId
     const comment = {
-      commentorId: session ? session.user.id.substring(0, 17) : "000",
+      commentorId: session ? session.user.id : "000",
       name: session ? session.user.name : "Guest User",
       profilePic: session ? session.user.image : "",
       comment: commentInput,
@@ -206,18 +208,18 @@ function Post({ postId, author, comments, likes, text }) {
               onClick={likeClicked}
               className=" flex items-center justify-center space-x-2 cursor-pointer rounded-lg hover:bg-stone-500  flex-1 py-1">
               {likedByUser ? (
-                <ThumbUpIcon className=" h-5 w-5 " />
+                <ThumbUpIcon className=" scale-75 " />
               ) : (
-                <ThumbUpOutlinedIcon className=" h-5 w-5" />
+                <ThumbUpOutlinedIcon className=" scale-75 " />
               )}
               <p className=" select-none">Like</p>
             </div>
             <div className=" flex items-center justify-center space-x-2 flex-1 cursor-pointer rounded-lg hover:bg-stone-500">
-              <ChatBubbleOutlineOutlinedIcon className=" h-5 w-5" />
+              <ChatBubbleOutlineOutlinedIcon className=" scale-75 " />
               <p className=" select-none">Comment</p>
             </div>
             <div className=" flex items-center justify-center space-x-2 flex-1 cursor-pointer rounded-lg hover:bg-stone-500">
-              <SendOutlinedIcon className=" h-5 w-5" />
+              <SendOutlinedIcon className=" scale-75 " />
               <p className=" select-none">Send</p>
             </div>
 
@@ -255,3 +257,5 @@ function Post({ postId, author, comments, likes, text }) {
 }
 
 export default Post
+
+
