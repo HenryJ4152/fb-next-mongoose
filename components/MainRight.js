@@ -7,9 +7,9 @@ function MainRight({ users }) {
 
   const { data: session } = useSession()
 
-
+ 
   return (
-    <div className="fixed right-0 top-0 w-[25vw] h-[100vh] pt-12 flex flex-col overflow-y-hidden hover:overflow-y-scroll hover:scrollbar-hidden  scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent ">
+    <div className="hidden fixed right-0 top-0 w-[25vw] h-[100vh] pt-12 lg:flex flex-col overflow-y-hidden hover:overflow-y-scroll hover:scrollbar-hidden  scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent ">
 
       <p className=" mt-2 px-2 pb-2">Contacts</p>
 

@@ -23,8 +23,8 @@ function MainCenter({ posts }) {
   // if (data) console.log(data)
 
   return (
-    <div className=" w-full   py-12 flex flex-col   items-center  ">
-      <div className=" w-[40vw]   flex flex-col  items-center">
+    <div className=" w-full    py-12 flex flex-col items-center md:items-end md:mr-5   lg:items-center  ">
+      <div className=" w-[67vw] lg:w-[40vw]   flex flex-col   items-center">
 
         <StoriesContainer />
         <CreatePostContainer />

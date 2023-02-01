@@ -18,7 +18,7 @@ function MainLeft() {
   const { data: session } = useSession()
 
   return (
-    <div className="fixed w-[25vw] h-[100vh] pt-12 flex flex-col overflow-y-hidden hover:overflow-y-scroll hover:scrollbar-hidden  scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+    <div className="hidden md:flex lg:flex fixed w-[25vw] h-[100vh] pt-12 flex-col overflow-y-hidden hover:overflow-y-scroll hover:scrollbar-hidden  scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
       <LeftOption Icon={HomeIcon} title={"Home"} />
       {session ? (
         <Link href={`/${session?.user?.id.slice(0, 17)}`}>

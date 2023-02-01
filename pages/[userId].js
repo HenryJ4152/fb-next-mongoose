@@ -184,24 +184,26 @@ function UserPage({ userSSR, users, posts }) {
         <div className="  flex flex-col bg-stone-800 w-full mx-auto justify-center ">
           {/* 1 */}
           <img
-            className="  w-[70vw] h-[50vh] object-cover rounded-b-lg  mx-auto  "
+            className="  w-[70vw] lg:h-[50vh] object-cover rounded-b-lg  mx-auto  "
             src="https://miro.medium.com/max/1400/1*2tmzU7bve-VlTkOMWsk_Hw.jpeg" alt=""
           />
           {/* 2 */}
-          <div className=" flex px-4 space-x-3 mb-1 w-[70vw] mx-auto">
+          <div className=" flex flex-col items-center lg:flex-row px-4 space-x-3 mb-1 w-[70vw] mx-auto">
 
-            {!guestUser ? (
-              <img className="rounded-full h-32 w-32 -mt-3 object-cover" src={userSSR?.image} alt="user profile image" />
-            ) : (
-              <img className="rounded-full h-32 w-32 -mt-3 object-scale-down" src={"https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"} alt="user profile image" />
-            )}
+            <div className="rounded-full h-32 w-32  -mt-16 lg:-mt-3  bg-stone-400 overflow-hidden">
+              {!guestUser ? (
+                <img className=" object-cover w-full h-full" src={userSSR?.image} />
+              ) : (
+                <img className=" object-scale-down w-full h-full" src={"https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"} />
+              )}
+            </div>
 
-            <div className=" flex flex-col mt-3 w-full">
+            <div className=" flex-1 items-center lg:items-start flex flex-col mt-3 w-full">
               <p className=" font-bold text-3xl mb-1">{userSSR?.name || "Guest User"}</p>
               <p className=" text-sm text-stone-300 mb-1">500 friends</p>
 
-              <div className=" flex justify-between w-full bg-stone-800">
-                <div className=" flex">
+              <div className="flex flex-col items-center lg:flex-row justify-between w-full bg-stone-800">
+                <div className=" flex mb-1 lg:mb-0">
                   <Avatar className=" scale-75 -ml-3 z-40 bg-blue-700" />
                   <Avatar className=" scale-75 -ml-3 z-40 bg-blue-600" />
                   <Avatar className=" scale-75 -ml-3 z-40 bg-blue-500" />
@@ -254,9 +256,9 @@ function UserPage({ userSSR, users, posts }) {
               <button className=" hover:bg-stone-600 px-3 py-2 rounded-md ">About</button>
               <button className=" hover:bg-stone-600 px-3 py-2 rounded-md ">Friends</button>
               <button className=" hover:bg-stone-600 px-3 py-2 rounded-md ">Photos</button>
-              <button className=" hover:bg-stone-600 px-3 py-2 rounded-md ">Videos</button>
-              <button className=" hover:bg-stone-600 px-3 py-2 rounded-md ">Check-ins</button>
-              <button className=" hover:bg-stone-600 px-3 py-2 pr-1 rounded-md">More <ArrowDropDownIcon className=" -ml-1 p-0" /></button>
+              <button className=" hover:bg-stone-600 px-3 py-2 rounded-md hidden lg:flex">Videos</button>
+              <button className=" hover:bg-stone-600 px-3 py-2 rounded-md hidden lg:flex">Check-ins</button>
+              <button className=" hover:bg-stone-600 px-3 py-2 pr-1 rounded-md hidden lg:flex">More <ArrowDropDownIcon className=" -ml-1 p-0" /></button>
             </div>
             <div>
               <button className=" bg-stone-700 hover:bg-stone-600 px-1 py-0.5 rounded-md ">
@@ -272,9 +274,9 @@ function UserPage({ userSSR, users, posts }) {
         <div className=" w-screen bg-stone-900 ">
           {/* for color */}
 
-          <div className=" grid grid-cols-5 px-4 w-[70vw] mx-auto pt-5 gap-3">
+          <div className=" lg:grid grid-cols-5 px-4 w-[70vw] mx-auto pt-5 gap-3">
             {/* left = intro - photos - friends */}
-            <div className=" left col-span-2 pb-12 ">
+            <div className=" left col-span-2 lg:pb-12 ">
               <div className=" bg-stone-800 rounded-md px-4 py-4 text-xl font-bold mb-4">
                 Intro
               </div>

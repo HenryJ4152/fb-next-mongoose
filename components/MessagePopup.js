@@ -82,7 +82,6 @@ function MessagePopup() {
   }, [socketMsg, socket])
 
 
-
   //add user to server's list of users
   useEffect(() => {
     socket.emit("addUser", id1)
@@ -91,11 +90,6 @@ function MessagePopup() {
     //   // console.log(users);
     // })
   }, [id1])
-
-
-
-
-
 
 
 
@@ -155,7 +149,7 @@ function MessagePopup() {
 
     const msg = messageInput
     const messageDocId = data._id
-    const senderId = session?.user?.id.substring(0, 17) || "000"
+    const senderId = session?.user?.id || "000"
     const createdAt = new Date()
     // console.log(createdAt.getTime())
     sendMutation.mutate([messageDocId, senderId, msg, createdAt])

@@ -52,7 +52,7 @@ export default function Home({ session, posts, users }) {
         {/* posts section */}
         <MainCenter posts={posts} />
         {/* right section */}
-        <MainRight users={users} />
+        <MainRight users={users}  />
 
         {messageOpen && <MessagePopup />}
 
@@ -92,8 +92,8 @@ export async function getServerSideProps(context) {
 
 
 // TODO:
-// make a realtime chat app with next mongoose socket 
-// connect socket io - pick up msges - vercel does not support. heroku supports socketio
+// mobile responsive
+// image placeholders
 // store image? on firebase?
 
 
@@ -129,6 +129,8 @@ export async function getServerSideProps(context) {
 // open chat and send msg scroll to bottom
 // guest user no add friend button
 // fix icons in deployed mode
+// make a realtime chat app with next mongoose socket 
+// connect socket io - pick up msges - vercel does not support. heroku/render supports socketio
 
 
 
